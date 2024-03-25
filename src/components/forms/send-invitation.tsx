@@ -114,7 +114,7 @@ const SendInvitation: React.FC<SendInvitationProps> = ({ agencyId }) => {
                 <FormItem className="flex-1">
                   <FormLabel>User role</FormLabel>
                   <Select
-                    onValueChange={(value) => field.onChange(value)}
+                    onValueChange={(value:any) => field.onChange(value)}
                     defaultValue={field.value}
                   >
                     <FormControl>
