@@ -151,19 +151,19 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
       subAccountId,
       val
     )
-    if (type === 'agency') {
-      await saveActivityLogsNotification({
-        agencyId: authUserData?.Agency?.id,
-        description: `Gave ${userData?.name} access to | ${
-          subAccountPermissions?.Permissions.find(
-            (p) => p.subAccountId === subAccountId
-          )?.SubAccount.name
-        } `,
-        subaccountId: subAccountPermissions?.Permissions.find(
-          (p) => p.subAccountId === subAccountId
-        )?.SubAccount.id,
-      })
-    }
+    // if (type === 'agency') {
+    //   await saveActivityLogsNotification({
+    //     agencyId: authUserData?.Agency?.id,
+    //     description: `Gave ${userData?.name} access to | ${
+    //       subAccountPermissions?.Permissions.find(
+    //         (p) => p.subAccountId === subAccountId
+    //       )?.SubAccount.name
+    //     } `,
+    //     subaccountId: subAccountPermissions?.Permissions.find(
+    //       (p) => p.subAccountId === subAccountId
+    //     )?.SubAccount.id,
+    //   })
+    // }
 
     if (response) {
       toast({
