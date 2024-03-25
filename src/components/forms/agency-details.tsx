@@ -1,5 +1,5 @@
 'use client'
-import { Agency } from '@prisma/client'
+// import { Agency } from '@prisma/client'
 import { useForm } from 'react-hook-form'
 import React, { useEffect, useState } from 'react'
 import { NumberInput } from '@tremor/react'
@@ -49,6 +49,26 @@ import {
 } from '@/lib/queries'
 import { Button } from '../ui/button'
 import Loading from '../global/loading'
+
+// agncy 
+type Agency = {
+  id: string
+  name: string
+  companyEmail: string
+  companyPhone: string
+  whiteLabel: boolean
+  address: string
+  city: string
+  zipCode: string
+  state: string
+  country: string
+  agencyLogo: string
+  customerId: string
+  connectAccountId: string
+  goal: number
+  createdAt: Date
+  updatedAt: Date
+}
 
 type Props = {
   data?: Partial<Agency>
