@@ -34,6 +34,7 @@ import {
 import { useRouter } from 'next/navigation'
 import { v4 } from 'uuid'
 import { CopyPlusIcon, Trash } from 'lucide-react'
+// import { Funnel } from '@prisma/client'
 
 // Funnel page
 export interface FunnelPage {
@@ -49,7 +50,51 @@ export interface FunnelPage {
   funnelId: string;
 }
 
+// Funnel
+// interface Funnel {
+//   id: string;
+//   name: string;
+//   createdAt: Date;
+//   updatedAt: Date;
+//   description?: string | null;
+//   published: boolean;
+//   subDomainName?: string | null;
+//   favicon?: string | null;
+//   subAccountId: string;
+//   SubAccount: SubAccount;
+//   FunnelPages: FunnelPage[];
+//   liveProducts?: string | null;
+//   ClassName: ClassName[];
+// }
 
+// SubAccount
+// interface SubAccount {
+//   id: string;
+//   name: string;
+//   createdAt: Date;
+//   updatedAt: Date;
+//   stripeCustomerId: string;
+//   stripeAccountId: string;
+//   stripeAccount: StripeAccount;
+// }
+
+// // StripeAccount
+// interface StripeAccount {
+//   id: string;
+//   stripeAccountId: string;
+//   stripeAccount: string;
+//   createdAt: Date;
+//   updatedAt: Date;
+// }
+
+// // ClassName
+// interface ClassName {
+//   id: string;
+//   name: string;
+//   createdAt: Date;
+//   updatedAt: Date;
+//   subAccountId: string;
+// }
 
 interface CreateFunnelPageProps {
   defaultData?: FunnelPage
@@ -199,7 +244,7 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
                   {form.formState.isSubmitting ? <Loading /> : <Trash />}
                 </Button>
               )}
-              {defaultData?.id && (
+              {/* {defaultData?.id && (
                 <Button
                   variant={'outline'}
                   size={'icon'}
@@ -208,7 +253,7 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
                   onClick={async () => {
                     const response = await getFunnels(subaccountId)
                     const lastFunnelPage = response.find(
-                      (funnel) => funnel.id === funnelId
+                      (funnel: Funnel) => funnel.id === funnelId
                     )?.FunnelPages.length
 
                     await upsertFunnelPage(
@@ -233,7 +278,7 @@ const CreateFunnelPage: React.FC<CreateFunnelPageProps> = ({
                 >
                   {form.formState.isSubmitting ? <Loading /> : <CopyPlusIcon />}
                 </Button>
-              )}
+              )} */}
             </div>
           </form>
         </Form>
