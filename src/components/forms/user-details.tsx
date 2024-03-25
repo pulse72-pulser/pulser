@@ -4,7 +4,7 @@ import {
   UserWithPermissionsAndSubAccounts,
 } from '@/lib/types'
 import { useModal } from '@/providers/modal-provider'
-import { SubAccount, User } from '@prisma/client'
+// import { SubAccount, User } from '@prisma/client'
 import React, { useEffect, useState } from 'react'
 import { useToast } from '../ui/use-toast'
 import { useRouter } from 'next/navigation'
@@ -49,6 +49,21 @@ import Loading from '../global/loading'
 import { Separator } from '../ui/separator'
 import { Switch } from '../ui/switch'
 import { v4 } from 'uuid'
+
+// user
+export interface User {
+  id: string
+  name: string
+  email: string
+  avatarUrl: string
+  role: 'AGENCY_OWNER' | 'AGENCY_ADMIN' | 'SUBACCOUNT_USER' | 'SUBACCOUNT_GUEST'
+}
+
+// subaccount
+export interface SubAccount {
+  id: string
+  name: string
+}
 
 type Props = {
   id: string | null

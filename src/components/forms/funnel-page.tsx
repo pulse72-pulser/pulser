@@ -23,7 +23,7 @@ import { Input } from '../ui/input'
 import { Button } from '../ui/button'
 import Loading from '../global/loading'
 import { useToast } from '../ui/use-toast'
-import { FunnelPage } from '@prisma/client'
+// import { FunnelPage } from '@prisma/client'
 import { FunnelPageSchema } from '@/lib/types'
 import {
   deleteFunnelePage,
@@ -34,6 +34,16 @@ import {
 import { useRouter } from 'next/navigation'
 import { v4 } from 'uuid'
 import { CopyPlusIcon, Trash } from 'lucide-react'
+
+// Funnel page
+export interface FunnelPage {
+  id: string
+  name: string
+  pathName: string
+  order: number
+  visits: number
+  content: string
+}
 
 interface CreateFunnelPageProps {
   defaultData?: FunnelPage

@@ -26,7 +26,7 @@ import {
 } from '@/components/ui/card'
 
 import FileUpload from '../global/file-upload'
-import { Agency, SubAccount } from '@prisma/client'
+// import { Agency, SubAccount } from '@prisma/client'
 import { useToast } from '../ui/use-toast'
 import { saveActivityLogsNotification, upsertSubAccount } from '@/lib/queries'
 import { useEffect } from 'react'
@@ -48,6 +48,41 @@ const formSchema = z.object({
 //CHALLENGE Give access for Subaccount Guest they should see a different view maybe a form that allows them to create tickets
 
 //CHALLENGE layout.tsx oonly runs once as a result if you remove permissions for someone and they keep navigating the layout.tsx wont fire again. solution- save the data inside metadata for current user.
+
+// agnecy
+export interface Agency {
+  id: string
+  name: string
+  address: string
+  city: string
+  state: string
+  zipCode: string
+  country: string
+  agencyLogo: string
+  agencyPhone: string
+  agencyEmail: string
+  createdAt: Date
+  updatedAt: Date
+}
+
+// subaccount
+export interface SubAccount {
+  id: string
+  name: string
+  companyEmail: string
+  companyPhone: string
+  address: string
+  city: string
+  state: string
+  zipCode: string
+  country: string
+  subAccountLogo: string
+  createdAt: Date
+  updatedAt: Date
+  agencyId: string
+  connectAccountId: string
+  goal: number
+}
 
 interface SubAccountDetailsProps {
   //To add the sub account to the agency

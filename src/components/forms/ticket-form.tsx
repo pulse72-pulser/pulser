@@ -8,7 +8,7 @@ import {
 import { TicketFormSchema, TicketWithTags } from '@/lib/types'
 import { useModal } from '@/providers/modal-provider'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Contact, Tag, User } from '@prisma/client'
+// import { Contact, Tag, User } from '@prisma/client'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useRef, useState } from 'react'
 import { useForm } from 'react-hook-form'
@@ -54,6 +54,24 @@ type Props = {
   laneId: string
   subaccountId: string
   getNewTicket: (ticket: TicketWithTags[0]) => void
+}
+
+// tag
+export interface Tag {
+  id: string; name: string; color: string; createdAt: Date; updatedAt: Date; subAccountId: string;
+}
+
+// contact
+export interface Contact {
+  id: string
+  name: string
+}
+
+// user
+export interface User {
+  id: string
+  name: string
+  avatarUrl: string
 }
 
 const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {

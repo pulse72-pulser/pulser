@@ -18,7 +18,7 @@ import {
   CardContent,
 } from '@/components/ui/card'
 import { useForm } from 'react-hook-form'
-import { Funnel, Pipeline } from '@prisma/client'
+// import {  Pipeline } from '@prisma/client'
 import { Input } from '../ui/input'
 
 import { Button } from '../ui/button'
@@ -34,6 +34,13 @@ import { toast } from '../ui/use-toast'
 import { useModal } from '@/providers/modal-provider'
 import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
+
+// pipline 
+export interface Pipeline {
+  id: string
+  name: string
+  subAccountId: string
+}
 
 interface CreatePipelineFormProps {
   defaultData?: Pipeline

@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/form'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { useForm } from 'react-hook-form'
-import { Funnel } from '@prisma/client'
+// import { Funnel } from '@prisma/client'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 
@@ -27,6 +27,16 @@ import { useRouter } from 'next/navigation'
 import { zodResolver } from '@hookform/resolvers/zod'
 import FileUpload from '../global/file-upload'
 
+// funnel 
+export interface Funnel {
+  id: string
+  name: string
+  subAccountId: string
+  description: string
+  favicon: string
+  subDomainName: string
+  liveProducts: string
+}
 interface CreateFunnelProps {
   defaultData?: Funnel
   subAccountId: string
