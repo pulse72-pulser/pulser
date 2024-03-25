@@ -37,13 +37,19 @@ import { CopyPlusIcon, Trash } from 'lucide-react'
 
 // Funnel page
 export interface FunnelPage {
-  id: string
-  name: string
-  pathName: string
-  order: number
-  visits: number
-  content: string
+  id: string;
+  name: string;
+  pathName: string;
+  createdAt: Date;
+  updatedAt: Date;
+  visits: number;
+  content: string | null;
+  order: number;
+  previewImage: string | null;
+  funnelId: string;
 }
+
+
 
 interface CreateFunnelPageProps {
   defaultData?: FunnelPage
