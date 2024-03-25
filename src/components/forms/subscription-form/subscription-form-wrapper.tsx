@@ -3,7 +3,8 @@ import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { toast } from '@/components/ui/use-toast'
 import { pricingCards } from '@/lib/constants'
 import { useModal } from '@/providers/modal-provider'
-import { Plan } from '@prisma/client'
+// import { Plan } from '@prisma/client'
+import {Plan} from "@/lib/apiEnums";
 import { StripeElementsOptions } from '@stripe/stripe-js'
 import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
@@ -75,7 +76,7 @@ const SubscriptionFormWrapper = ({ customerId, planExists }: Props) => {
   return (
     <div className="border-none transition-all">
       <div className="flex flex-col gap-4">
-        {data.plans?.plans.map((price) => (
+        {data.plans?.plans.map((price:any) => (
           <Card
             onClick={() => setSelectedPriceId(price.id as Plan)}
             key={price.id}
