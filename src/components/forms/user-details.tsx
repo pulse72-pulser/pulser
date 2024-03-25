@@ -303,7 +303,7 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
                   <FormLabel> User Role</FormLabel>
                   <Select
                     disabled={field.value === 'AGENCY_OWNER'}
-                    onValueChange={(value) => {
+                    onValueChange={(value:any) => {
                       if (
                         value === 'SUBACCOUNT_USER' ||
                         value === 'SUBACCOUNT_GUEST'

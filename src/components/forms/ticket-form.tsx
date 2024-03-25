@@ -303,7 +303,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                     placeholder="Search..."
                     className="h-9"
                     value={search}
-                    onChangeCapture={async (value) => {
+                    onChangeCapture={async (value:any) => {
                       //@ts-ignore
                       setSearch(value.target.value)
                       if (saveTimerRef.current)
@@ -324,7 +324,7 @@ const TicketForm = ({ getNewTicket, laneId, subaccountId }: Props) => {
                       <CommandItem
                         key={c.id}
                         value={c.id}
-                        onSelect={(currentValue) => {
+                        onSelect={(currentValue:any) => {
                           setContact(
                             currentValue === contact ? '' : currentValue
                           )
