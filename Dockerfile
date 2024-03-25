@@ -9,17 +9,17 @@ COPY . .
 # Build the app
 RUN npm run build
 
-# - RUN STAGE
-FROM nginxinc/nginx-unprivileged:latest
+# # - RUN STAGE
+# FROM nginxinc/nginx-unprivileged:latest
 
-# Remove the default NGINX config file
-RUN rm /etc/nginx/conf.d/default.conf
+# # Remove the default NGINX config file
+# RUN rm /etc/nginx/conf.d/default.conf
 
-# Copy the nginx config
-COPY conf/nginx.conf /etc/nginx/conf.d/
+# # Copy the nginx config
+# COPY conf/nginx.conf /etc/nginx/conf.d/
 
-# Copy built app to nginx public directory
-COPY --from=build-stage /app/dist /usr/share/nginx/html
+# # Copy built app to nginx public directory
+# COPY --from=build-stage /app/dist /usr/share/nginx/html
 
 USER 10014 
 
@@ -27,4 +27,6 @@ USER 10014
 # expose 
 EXPOSE 8080
 
-CMD ["nginx", "-g", "daemon off;"]
+# CMD ["nginx", "-g", "daemon off;"]
+
+CMD ["npm", "run", "start"]
