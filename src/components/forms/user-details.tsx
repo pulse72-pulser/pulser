@@ -193,9 +193,9 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
     if (!id) return
     if (userData || data?.user) {
       const updatedUser = await updateUser(values)
-      authUserData?.Agency?.SubAccount.filter((subacc) =>
+      authUserData?.Agency?.SubAccount.filter((subacc:any) =>
         authUserData.Permissions.find(
-          (p) => p.subAccountId === subacc.id && p.access
+          (p:any) => p.subAccountId === subacc.id && p.access
         )
       ).forEach(async (subaccount) => {
         await saveActivityLogsNotification({
