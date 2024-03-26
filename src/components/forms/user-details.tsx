@@ -171,7 +171,7 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
         description: 'The request was successfull',
       })
       if (subAccountPermissions) {
-        subAccountPermissions.Permissions.find((perm) => {
+        subAccountPermissions.Permissions.find((perm:any) => {
           if (perm.subAccountId === subAccountId) {
             return { ...perm, access: !perm.access }
           }
