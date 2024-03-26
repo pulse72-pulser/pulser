@@ -197,7 +197,7 @@ const UserDetails = ({ id, type, subAccounts, userData }: Props) => {
         authUserData.Permissions.find(
           (p:any) => p.subAccountId === subacc.id && p.access
         )
-      ).forEach(async (subaccount) => {
+      ).forEach(async (subaccount :any) => {
         await saveActivityLogsNotification({
           agencyId: undefined,
           description: `Updated ${userData?.name} information`,
