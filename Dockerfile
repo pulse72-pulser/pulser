@@ -56,10 +56,10 @@ RUN npm install --save typescript @types/node
 RUN npm run build
 
 # Set user (assuming it's required)
-USER 10014
+# USER 10014
 
 # Expose port
-EXPOSE 8080
+EXPOSE 3000
 
 # Command to start the application (modify as per your project setup)
 # CMD ["node", "./dist/index.js"]
