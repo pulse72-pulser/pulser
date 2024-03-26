@@ -3,8 +3,8 @@ import { Card, CardHeader, CardTitle } from '@/components/ui/card'
 import { toast } from '@/components/ui/use-toast'
 import { pricingCards } from '@/lib/constants'
 import { useModal } from '@/providers/modal-provider'
-// import { Plan } from '@prisma/client'
-import {Plan} from "@/lib/apiEnums";
+import { Plan } from '@prisma/client'
+// import {Plan} from "@/lib/apiEnums";
 import { StripeElementsOptions } from '@stripe/stripe-js'
 import clsx from 'clsx'
 import { useRouter } from 'next/navigation'
