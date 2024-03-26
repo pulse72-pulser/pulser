@@ -62,4 +62,5 @@ USER 10014
 EXPOSE 8080
 
 # Command to start the application (modify as per your project setup)
-CMD ["node", "./dist/index.js"]
+# CMD ["node", "./dist/index.js"]
+ENTRYPOINT [ "npm", "run", "start" ]
