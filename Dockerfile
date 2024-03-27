@@ -12,4 +12,5 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY .nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /pulser-app/out /usr/share/nginx/html
 EXPOSE 80
+USER 10014
 CMD ["nginx", "-g", "daemon off;"]
