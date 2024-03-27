@@ -149,6 +149,8 @@ RUN yarn build
 # remove development dependencies
 RUN yarn install --production
 
+USER 10014
+
 ####################################################### 
 
 FROM nginx:alpine
