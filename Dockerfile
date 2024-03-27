@@ -1,16 +1,26 @@
-# stage1 as builder
-FROM node:20-alpine as builder
+FROM node:20
 
-COPY package.json ./
-RUN npm install && mkdir /pulser-app && mv ./node_modules ./pulser-app
-WORKDIR /pulser-app
+WORKDIR /app
+
+COPY package.json package-lock.json* ./
+RUN npm cache clean --force && \
+    npm install -g npm@latest && \
+    npm install
+
 COPY . .
+
+ENV NEXT_TELEMETRY_DISABLED 1
+
 RUN npm run build
 
-FROM nginx:alpine
-RUN rm -rf /usr/share/nginx/html/*
-COPY .nginx/nginx.conf /etc/nginx/nginx.conf
-COPY --from=builder /pulser-app/out /usr/share/nginx/html
-EXPOSE 80
+ENV NODE_ENV production
+
+ENV NEXT_TELEMETRY_DISABLED 1
+
 USER 10014
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 3000
+
+ENV HOSTNAME 0.0.0.0
+ENV PORT 3000
+
+CMD ["./node_modules/.bin/next", "start"]
