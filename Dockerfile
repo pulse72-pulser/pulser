@@ -83,44 +83,96 @@
 
 
 
-# Use a specific node version (adjust version as needed)
-FROM node:20-slim AS build-stage
+# # Use a specific node version (adjust version as needed)
+# FROM node:20-slim AS build-stage
+
+# # Set working directory
+# WORKDIR /app
+
+# # Copy package.json and package-lock.json/yarn.lock for caching dependencies
+# COPY package*.json ./
+
+# # Install dependencies
+# RUN npm install
+
+# # Copy the rest of the application
+# COPY . .
+
+# # Install TypeScript and @types/node
+# # RUN npm install --save typescript @types/node
+
+# # Build the application (assuming you have a script for this in your package.json)
+# RUN npm run build
+
+# # Build NGINX stage
+# FROM nginxinc/nginx-unprivileged:latest AS nginx-build
+
+# # Remove the default NGINX config file
+# RUN rm /etc/nginx/conf.d/default.conf
+
+# # Copy the nginx config from build stage
+# COPY conf/nginx.conf /etc/nginx/conf.d/
+
+# # Copy built app to nginx public directory from build stage
+# COPY --from=build-stage /app/dist /usr/share/nginx/html
+
+# # Set user (assuming it's required)
+# USER 10014
+
+# # Expose port
+# EXPOSE 3000
+
+# # Command to start the NGINX server
+# CMD ["nginx", "-g", "daemon off;"]
+
+
+# Base on offical Node.js Alpine image
+FROM node:latest as builder
 
 # Set working directory
-WORKDIR /app
+WORKDIR /usr/app
 
-# Copy package.json and package-lock.json/yarn.lock for caching dependencies
-COPY package*.json ./
+# Copy package.json and package-lock.json before other files
+# Utilise Docker cache to save re-installing dependencies if unchanged
+COPY package.json ./
+COPY yarn.lock ./
 
 # Install dependencies
-RUN npm install
+RUN yarn install --frozen-lockfile
 
-# Copy the rest of the application
-COPY . .
+# Copy all files
+COPY ./ ./
 
-# Install TypeScript and @types/node
-# RUN npm install --save typescript @types/node
+# Build app
+RUN yarn build
 
-# Build the application (assuming you have a script for this in your package.json)
-RUN npm run build
+# remove development dependencies
+RUN yarn install --production
 
-# Build NGINX stage
-FROM nginxinc/nginx-unprivileged:latest AS nginx-build
+####################################################### 
 
-# Remove the default NGINX config file
-RUN rm /etc/nginx/conf.d/default.conf
+FROM nginx:alpine
 
-# Copy the nginx config from build stage
-COPY conf/nginx.conf /etc/nginx/conf.d/
+WORKDIR /usr/app
 
-# Copy built app to nginx public directory from build stage
-COPY --from=build-stage /app/dist /usr/share/nginx/html
+RUN apk add nodejs-current npm supervisor
+RUN mkdir mkdir -p /var/log/supervisor && mkdir -p /etc/supervisor/conf.d
 
-# Set user (assuming it's required)
-USER 10014
+# Remove any existing config files
+RUN rm /etc/nginx/conf.d/*
 
-# Expose port
-EXPOSE 3000
+# Copy nginx config files
+# *.conf files in conf.d/ dir get included in main config
+COPY ./.nginx/default.conf /etc/nginx/conf.d/
 
-# Command to start the NGINX server
-CMD ["nginx", "-g", "daemon off;"]
+# COPY package.json next.config.js .env* ./
+# COPY --from=builder /usr/app/public ./public
+COPY --from=builder /usr/app/.next ./.next
+COPY --from=builder /usr/app/node_modules ./node_modules
+
+# supervisor base configuration
+ADD supervisor.conf /etc/supervisor.conf
+
+# replace $PORT in nginx config (provided by executior) and start supervisord (run nextjs and nginx)
+CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && \
+  supervisord -c /etc/supervisor.conf
